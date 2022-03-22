@@ -1,14 +1,23 @@
+import { getAuth } from 'firebase/auth';
 import { firebase, googleAuthProvider } from '../firebase/firebaseConfig'
 import { types } from "../types/types"
+import { finishLoading, startLoading } from './ui';
 
 export const startLoginEmailPassword = ( email, password ) => {
   return (dispatch) => {
+    dispatch( startLoading() );
     firebase.auth().signInWithEmailAndPassword( email, password )
-      .then( ({ user }) => {
-        dispatch(login( user.uid, user.displayName ));
-      })
-  }
-};
+    .then( ({ user }) => {
+      dispatch(login( user.uid, user.displayName ));
+      dispatch( finishLoading() );
+    })
+    .catch(e => {
+      dispatch( finishLoading() );
+      
+    })
+  };
+    
+}
 
 export const startWithRegisterEmailPasswordName = ( name, email, password ) => {
 
@@ -42,4 +51,20 @@ export const login = ( uid, displayName ) => ({
       uid,
       displayName
     }
-})
+});
+
+export const startLogout = () => {
+
+  return async( dispatch ) => {
+    getAuth().signOut();
+  
+    dispatch( logout );
+  }
+  
+};
+
+export const logout = () => {
+  return {
+    type: types.logout
+  }
+}
