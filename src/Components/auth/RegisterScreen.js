@@ -12,7 +12,6 @@ export const RegisterScreen = () => {
   const dispatch = useDispatch();
   const { msgError } = useSelector( state => state.ui )
 
-  console.log(msgError);
 
   const [ formValues, handleInputChange ] = useForm({
     name: 'Patts',
@@ -41,7 +40,6 @@ export const RegisterScreen = () => {
       dispatch(setError('Email is not valid'));
       return false;
     } else if ( password !== password2 || password.length < 6 ) {
-      console.log('Password should be at least 6 characters and match each other');
       dispatch(setError('Password should be at least 6 characters and match each other'));
       return false;
     }

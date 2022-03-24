@@ -7,6 +7,7 @@ import { AuthRouter } from "./AuthRouter";
 import { login } from "../actions/auth";
 import { PublicRoute } from "./PublicRouter";
 import { PrivateRoute } from "./PrivateRouter";
+import { startLoadingNotes } from "../actions/notes";
 
 export const AppRouter = () => {
 
@@ -19,10 +20,11 @@ export const AppRouter = () => {
     
     const auth = getAuth();
     onAuthStateChanged( auth, (user) => {
-      console.log(user);
       if ( user?.uid ) {
         dispatch( login( user.uid, user.displayName ));
         setLogginIn(true);
+        
+        dispatch( startLoadingNotes(user.uid) );
       } else {
         setLogginIn(false);
       }
