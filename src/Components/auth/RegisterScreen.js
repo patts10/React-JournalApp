@@ -51,7 +51,7 @@ export const RegisterScreen = () => {
     <>
       <h3 className="auth__title">Register</h3>
 
-      <form onSubmit={ handleRegister }>
+      <form onSubmit={ handleRegister } className="animate__animated animate__fadeIn animate__faster">
 
         {
           msgError &&
@@ -102,7 +102,7 @@ export const RegisterScreen = () => {
           Register
         </button>
 
-        <Link to={"/auth/register"} className="link">
+        <Link to={"/auth/login"} className="link">
           Already registered?
         </Link>
       </form>

@@ -33,7 +33,7 @@ export const LoginScreen = () => {
           type="text"
           placeholder="email"
           name="email"
-          className="auth__input"
+          className="auth__input animate__animated animate__fadeIn animate__faster"
           autoComplete="off"
           value={email}
           onChange={handleInputChange}
